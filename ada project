@@ -2,6 +2,8 @@
 # Complete the 'subscription_summary' function below.
 #
 
+# Replace a magic number with a named constant If you’re using a numeric or string literal like 3.14, replace that literal with a named constant like PI.
+
 def subscription_summary(months_subscribed, ad_free_months, video_on_demand_purchases):
     """
     Parameters:
