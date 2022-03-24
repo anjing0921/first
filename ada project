@@ -14,16 +14,22 @@ def subscription_summary(months_subscribed, ad_free_months, video_on_demand_purc
     max_key_list = [] #  put the key of maximum value
     user_dictionary = {} # pair the account number (keys) and  sum purchase in account ( value)
     sum_ad_and_v_list = [] # each account pay for ad-free and movie
+    singel_price = 7
+    bundle_price = 18
+    ad_free_price = 2
+    video_price = 27.99
+    
     
     # all formulas
     for i in range(len(months_subscribed)):
         if months_subscribed[i] % 3 == 0: # 3 month bundle
-            ms = format(int(months_subscribed[i] / 3) * 18, '.2f')
+            ms = format(int(months_subscribed[i] / 3) * bundle_price, '.2f')
         else:
-            ms = format(int(months_subscribed[i] / 3) * 18 + int(months_subscribed[i] % 3) *7, '.2f')
+            ms = format(int(months_subscribed[i] / 3) * bundle_price + int(months_subscribed[i] % 
+            3)*singel_price, '.2f')
             
-        ad =  format(ad_free_months[i] * 2, '.2f') 
-        v =  format(video_on_demand_purchases[i] * 27.99, '.2f') 
+        ad =  format(ad_free_months[i] * ad_free_price, '.2f') 
+        v =  format(video_on_demand_purchases[i] * video_price, '.2f') 
                
         sum_ad_and_v = float(ad) + float(v)
         sum_account = format(float(ms)+ sum_ad_and_v, '.2f') # each user pay all
@@ -36,6 +42,7 @@ def subscription_summary(months_subscribed, ad_free_months, video_on_demand_purc
         user_dictionary[str(i+1)] = float(sum_account) # pair account and total payment
         
         sum_all_account = format(sum(user_dictionary.values()), '.2f')
+     
         
         
         print(f"Account {i+1} made ${sum_account} total")
