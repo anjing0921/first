@@ -22,59 +22,43 @@ def subscription_summary(months_subscribed, ad_free_months, video_on_demand_purc
     
     # all formulas
     for i in range(len(months_subscribed)):
-        if months_subscribed[i] % 3 == 0: # 3 month bundle
-            ms = format(int(months_subscribed[i] / 3) * bundle_price, '.2f')
-        else:
-            ms = format(int(months_subscribed[i] / 3) * bundle_price + int(months_subscribed[i] % 
-            3)*singel_price, '.2f')
-            
-        ad =  format(ad_free_months[i] * ad_free_price, '.2f') 
-        v =  format(video_on_demand_purchases[i] * video_price, '.2f') 
-               
-        sum_ad_and_v = float(ad) + float(v)
-        sum_account = format(float(ms)+ sum_ad_and_v, '.2f') # each user pay all
-         
-        
-        sum_ad_and_v_list.append(sum_ad_and_v)
-        sum_all_ad_and_v = format(sum(sum_ad_and_v_list), '.2f')
-        
-        
-        user_dictionary[str(i+1)] = float(sum_account) # pair account and total payment
-        
-        sum_all_account = format(sum(user_dictionary.values()), '.2f')
-     
-        
-        
-        print(f"Account {i+1} made ${sum_account} total")
+       ms = int(months_subscribed[i] / 3) * bundle_price + months_subscribed[i] % 3*singel_price
+       ad = ad_free_months[i] * ad_free_price
+       v =  video_on_demand_purchases[i] * video_price
+       sum_ad_and_v = ad + v
+       sum_account = ms + sum_ad_and_v # each user pay all
+       sum_ad_and_v_list.append(sum_ad_and_v)
+       sum_all_ad_and_v = sum(sum_ad_and_v_list)
+       user_dictionary[str(i+1)] = sum_account # pair account and total payment
+       sum_all_account = sum(user_dictionary.values())
+       def cent(ms,ad,v):
+           n = format(ms,'.2f')
+           o = format(ad,'.2f')
+           m = format(v,'.2f')
+           print(f"Account {i+1} made ${format(sum_account,'.2f')} total")
+           print(f">>> ${n} from monthly subscription fees")
+           print(f">>> ${o} from Ad-free upgrades")       
+           print(f">>> ${m} from Video on Demand purchases\n")
+       cent(ms,ad,v)
     
-        print(f">>> ${ms} from monthly subscription fees")
     
-        print(f">>> ${ad} from Ad-free upgrades")       
-        
-        print(f">>> ${v} from Video on Demand purchases\n")
-        
     
-        
+    
+        def account_details():
+        print(f"Account {i+1} made ${format(sum_account,'.2f')} total")
+        print(f">>> ${format(ms,'.2f')} from monthly subscription fees")
+        print(f">>> ${format(ad,'.2f')} from Ad-free upgrades")       
+        print(f">>> ${format(v,'.2f')} from Video on Demand purchases\n")
+        account_details()
     print(f"Combined all accounts made ${sum_all_account} total")
-      
     print(f"Premium content (Ad-free watching and Video on Demand) made ${sum_all_ad_and_v} total\n")
-    
     max_v = max(user_dictionary.values())    # the max payment
     print(f"${max_v} was the most earned by any single account")
-    
-    
     # find the account, which made most payment
-    
     for key,value in user_dictionary.items():
         if value == max_v:
-           
-            s = "#"+ key 
-            
-            max_key_list.append(s)
-    
-    y = ", ".join(str(i) for i in max_key_list) 
-    
-        
+           max_key_list.append(key)
+    y = ", ".join("#"+ str(i) for i in max_key_list) 
     print(f"The accounts that earned the most were: {y}")
         
     
