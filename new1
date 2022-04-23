@@ -1,0 +1,35 @@
+print("Welcome to the Ada+ Account Dashboard")
+    account = []
+    dic = {}
+    most_profit_account = []
+    def num_str(v):
+        return format(v,'.2f')
+    for i in range(len(months_subscribed)):
+        months_subscribed_fee = int(months_subscribed[i])// 3 * 18 + int(months_subscribed[i]) % 3 *7
+        ad_free_fee = int(ad_free_months[i]) * 2
+        video_fee = int(video_on_demand_purchases[i]) * 27.99
+        account_total = months_subscribed_fee + video_fee + ad_free_fee
+        dic[i+1] = account_total
+        
+        print(f'''
+Account {i + 1} made ${num_str(account_total)} total
+>>> ${num_str(months_subscribed_fee)} from monthly subscription fees
+>>> ${num_str(ad_free_fee)} from Ad-free upgrades
+>>> ${num_str(video_fee)} from Video on Demand purchases''')
+    total = sum(dic.values())
+    ad_and_video = sum(ad_free_months) * 2 + sum(video_on_demand_purchases) * 27.99  
+    print()
+    print(f"Combined all accounts made ${num_str(total)} total")
+    print(f"Premium content (Ad-free watching and Video on Demand) made ${num_str(ad_and_video)} total\n")
+    most_profit_value= max(dic.values())
+    for key, value in dic.items():
+        if value == most_profit_value:
+            s = "#" + str(key)
+            most_profit_account.append(s)
+    y = ", ".join(str(i) for i in most_profit_account) 
+            
+    
+    
+    print(f"${num_str(most_profit_value)} was the most earned by any single account")  
+    print(f"The accounts that earned the most were: {y}")  
+        
